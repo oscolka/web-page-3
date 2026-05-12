@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/web-page-3/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Forest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+IE:wght@100..400&display=swap" rel="stylesheet">
+    
+    <script type="module" crossorigin src="/web-page-3/assets/index-BxqihQeJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/web-page-3/assets/index-YcdILDpO.css">
+  </head>
+  <body>
+    <!-- Three.js Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Long scrolling container to allow ScrollTrigger to work -->
+    <div id="scroll-container">
+      <div class="scroll-content">
+        <!-- We use a very tall height to give us plenty of scrolling distance -->
+      </div>
+    </div>
+
+    <!-- Welcome Panel -->
+    <div id="welcome-panel">
+      <div class="welcome-card">
+        <h1 class="welcome-title">Atl&aelig;s</h1>
+        <p class="welcome-author">by Vira Chernomorets</p>
+        <p class="welcome-subtitle">An interactive journey through a living forest — where nature meets mathematics.</p>
+        <p class="welcome-subtitle">Scroll down to walk deeper into the woods.</p>
+
+        <p class="welcome-scroll-hint">Scroll to begin &rarr;</p>
+      </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="hidden">
+      <button id="modal-close">&times;</button>
+      <div id="modal-content">
+        <!-- iframe for p5.js sketches or video will be injected here -->
+      </div>
+    </div>
+
+  </body>
+</html>
