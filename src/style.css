@@ -1,0 +1,237 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #dcedd0; /* Pale green background */
+  font-family: "Playwrite IE", cursive;
+}
+
+/* 
+  The canvas container stays fixed to the viewport.
+*/
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+/* 
+  The scroll container needs to be very tall to allow scrolling 
+  through the Z depth.
+*/
+#scroll-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* Make it invisible so it just acts as a scroll bar provider */
+  pointer-events: none; 
+}
+
+.scroll-content {
+  /* This determines how long the user has to scroll. 
+     We will adjust this height dynamically or set a very large value. */
+  height: 20000px;
+}
+
+/* Welcome Panel */
+#welcome-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.welcome-card {
+  background: #fdf5e6;
+  border-radius: 16px;
+  padding: 3vw 4vw;
+  max-width: 500px;
+  width: 85%;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+  pointer-events: auto;
+}
+
+.welcome-title {
+  font-family: "Playwrite IE", cursive;
+  font-size: clamp(24px, 3.5vw, 40px);
+  color: #3a5a2a;
+  margin: 0 0 0.8vh 0;
+}
+
+.welcome-subtitle {
+  font-family: "Playwrite IE", cursive;
+  font-size: clamp(12px, 1.4vw, 16px);
+  color: #5a4636;
+  margin: 0.3vh 0;
+  line-height: 1.6;
+}
+
+.welcome-author {
+  font-family: "Playwrite IE", cursive;
+  font-size: clamp(13px, 1.6vw, 18px);
+  color: #8b7355;
+  margin: 0.5vh 0 1vh 0;
+}
+
+.welcome-divider {
+  width: 60%;
+  height: 1px;
+  background: rgba(90, 70, 54, 0.2);
+  margin: 2vh auto;
+}
+
+.welcome-discover-label {
+  font-family: "Playwrite IE", cursive;
+  font-size: clamp(13px, 1.5vw, 17px);
+  color: #3a5a2a;
+  margin: 1vh 0 0.5vh 0;
+}
+
+.welcome-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5vh 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4vw 1.2vw;
+}
+
+.welcome-list li {
+  font-family: "Playwrite IE", cursive;
+  font-size: clamp(11px, 1.2vw, 14px);
+  color: #5a4636;
+}
+
+.welcome-list li::before {
+  content: "· ";
+  color: #8b7355;
+}
+
+.welcome-scroll-hint {
+  font-family: "Playwrite IE", cursive;
+  font-size: clamp(11px, 1.2vw, 14px);
+  color: #8b7355;
+  margin: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Modal styling */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+#modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 50px;
+  cursor: pointer;
+  z-index: 11;
+  font-family: sans-serif; /* Keep the X symbol clear */
+}
+
+#modal-content {
+  width: 100vw;
+  height: 100vh;
+  background: #fdf5e6;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-animation {
+  width: 100%;
+  height: 85vh;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.modal-animation iframe,
+.modal-animation video {
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: contain;
+}
+
+.pannable-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+}
+
+.pannable-wrapper video {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.modal-text {
+  width: 100%;
+  height: 15vh;
+  box-sizing: border-box;
+  padding: 1.5vh 1.5vw;
+  background: #f0e4d0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  border-top: 2px solid rgba(139, 115, 85, 0.15);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.modal-title {
+  font-family: "Playwrite IE", cursive;
+  font-size: clamp(18px, 2.5vh, 28px);
+  color: #3a5a2a;
+  margin: 0 0 0.3vh 0;
+}
+
+.modal-description {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(12px, 1.6vh, 16px);
+  color: #5a4636;
+  margin: 0;
+  line-height: 1.5;
+}
